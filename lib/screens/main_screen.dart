@@ -1,7 +1,7 @@
+import 'package:e_commerce_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../services/eccommerce_service.dart';
-import '../widgets/custom_app_bar.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -24,6 +24,9 @@ class _MainScreenState extends State<MainScreen> {
   fetchProducts() async {
     EcommerceServices services = EcommerceServices();
     products = await services.fetchProducts();
+    setState(() {
+      products;
+    });
     print(products.toString());
   }
   @override
@@ -34,7 +37,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'E-commerce App'),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         selectedItemColor: Colors.deepPurple,
@@ -48,6 +50,13 @@ class _MainScreenState extends State<MainScreen> {
             selectedIndex = index;
           });
         },
+      ),
+      body: PageView(
+        children: [
+          HomeScreen(products: products),
+          const Text("Page 2"),
+          const Text("Page 3"),
+        ],
       ),
     );
   }

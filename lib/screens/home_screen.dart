@@ -2,6 +2,9 @@ import 'package:e_commerce_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../widgets/product_card.dart';
+import '../widgets/skeleton_product_card.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
@@ -67,6 +70,38 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: widget.products.isEmpty
+                  ? Skeletonizer(
+                      enabled: true,
+                      child: ListView.builder(
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return SkeletonProductCard();
+                        },
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: widget.products.length,
+                      itemBuilder: (context, index) {
+                        final product = widget.products[index];
+                        if (selectedCategory == "All" ||
+                            selectedCategory == product["category"]) {
+                          return GestureDetector(
+                            onTap: () {},
+                            child: ProductCard(
+                              product: product,
+                            ),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+            ),
+          )
         ],
       ),
     );

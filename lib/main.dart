@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -12,11 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'E-commerce App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Scaffold(),
+      home: const SplashScreen(),
     );
   }
 }

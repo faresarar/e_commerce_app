@@ -11,6 +11,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final List<dynamic> categories = [
+    "All",
+    "men's clothing",
+    "women's clothing",
+    "electronics",
+    "jewelery"
+  ];
+  String selectedCategory = "All";
   int selectedIndex = 0 ;
   List<dynamic> products = [];
   fetchProducts() async {
@@ -26,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'E-commerce App',),
+      appBar: CustomAppBar(title: 'E-commerce App'),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         selectedItemColor: Colors.deepPurple,

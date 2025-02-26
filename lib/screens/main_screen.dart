@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../services/eccommerce_service.dart';
 import '../widgets/custom_app_bar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -11,6 +12,17 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0 ;
+  List<dynamic> products = [];
+  fetchProducts() async {
+    EcommerceServices services = EcommerceServices();
+    products = await services.fetchProducts();
+    print(products.toString());
+  }
+  @override
+  void initState() {
+    fetchProducts();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,9 +1,10 @@
-import 'package:e_commerce_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../widgets/custom_app_bar.dart';
 import '../widgets/product_card.dart';
 import '../widgets/skeleton_product_card.dart';
+import 'product_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -90,7 +91,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (selectedCategory == "All" ||
                             selectedCategory == product["category"]) {
                           return GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ProductDetailsScreen(product: product),
+                                ),
+                              );
+                            },
                             child: ProductCard(
                               product: product,
                             ),

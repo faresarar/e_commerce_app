@@ -1,4 +1,6 @@
 import 'package:e_commerce_app/screens/home_screen.dart';
+import 'package:e_commerce_app/screens/shopping_cart_screen.dart';
+import 'package:e_commerce_app/screens/users_list_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../services/eccommerce_service.dart';
@@ -11,16 +13,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final List<dynamic> categories = [
-    "All",
-    "men's clothing",
-    "women's clothing",
-    "electronics",
-    "jewelery"
-  ];
-  String selectedCategory = "All";
   int selectedIndex = 0 ;
   List<dynamic> products = [];
+  PageController pageController = PageController(initialPage: 0);
   fetchProducts() async {
     EcommerceServices services = EcommerceServices();
     products = await services.fetchProducts();
@@ -48,14 +43,15 @@ class _MainScreenState extends State<MainScreen> {
         onTap: (index){
           setState(() {
             selectedIndex = index;
+            pageController.jumpToPage(index);
           });
         },
       ),
       body: PageView(
         children: [
           HomeScreen(products: products),
-          const Text("Page 2"),
-          const Text("Page 3"),
+          ShoppingCart(),
+          UsersListScreen(),
         ],
       ),
     );

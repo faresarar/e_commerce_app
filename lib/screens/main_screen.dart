@@ -48,9 +48,10 @@ class _MainScreenState extends State<MainScreen> {
         },
       ),
       body: PageView(
+        controller: pageController,
         children: [
           HomeScreen(products: products),
-          ShoppingCart(),
+          ShoppingCart(products: products,),
           UsersListScreen(),
         ],
       ),
